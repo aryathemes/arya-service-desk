@@ -1,0 +1,30 @@
+{
+    "name": "arya/arya-service-desk",
+    "type": "project",
+    "description": "WordPress Plugin Boilerplate",
+    "version": "1.0.0",
+    "authors": [
+        {
+             "name": "Your Name",
+             "homepage": "https://example.com",
+             "role": "Developer"
+        }
+    ],
+    "license": "GPL-2.0-or-later",
+    "minimum-stability": "dev",
+    "keywords": [ "wordpress", "plugin", "boilerplate" ],
+    "autoload": {
+        "psr-4": {
+            "Arya\\ServiceDesk\\": "arya-service-desk/src/"
+        },
+        "files": [
+            "arya-service-desk/src/functions.php"
+        ]
+    },
+    "config": {
+        "vendor-dir": "arya-service-desk/vendor/"
+    },
+    "require": {
+        "php": "^7.1"
+    }
+}
