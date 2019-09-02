@@ -1,10 +1,10 @@
 <?php
 /**
  * Plugin Name: Arya Service Desk
- * Plugin URI: https://example.com/arya-service-desk
+ * Plugin URI: https://github.com/aryathemes/arya-service-desk
  * Description: I hope this boilerplate helps you to write the best plugin possible.
- * Author: Your Name
- * Author URI: https://example.com
+ * Author: Arya Themes
+ * Author URI: https://www.aryathemes.com
  * Version: 1.0.0
  * License: GNU General Public License v2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -12,8 +12,8 @@
  * Domain Path: /languages
  *
  * @package   Arya\ServiceDesk
- * @author    Your Name
- * @copyright 2019 Your Name or Company Name
+ * @author    Luis A. Ochoa
+ * @copyright 2019 Luis A. Ochoa
  * @license   GPL-2.0-or-later
  */
 

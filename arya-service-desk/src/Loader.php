@@ -52,11 +52,6 @@ class Loader
         add_action( 'init', [ $this, 'registerTaxonomy' ] );
 
         add_action( 'init', [ $this, 'admin' ] );
-
-        /* WordPress 5.1 */
-        add_action( 'plugin_loaded', [ $this, 'plugin' ] );
-
-        add_action( 'plugins_loaded', [ $this, 'plugins' ] );
     }
 
     /**
@@ -170,7 +165,7 @@ class Loader
             'labels'              => $tickets_labels,
             'public'              => true,
             'hierarchical'        => false,
-            'exclude_from_search' => false,
+            'exclude_from_search' => true,
             'publicly_queryable'  => false,
             'show_in_menu'        => true,
             'show_in_nav_menus'   => false,
@@ -202,7 +197,7 @@ class Loader
             'show_in_rest'       => true,
             'show_tagcloud'      => false
         ];
-        register_taxonomy( 'service-desk-article-category', [ 'knowledge-base' ], $cat_args );
+        register_taxonomy( 'service-desk-article-cat', [ 'knowledge-base' ], $cat_args );
 
         $args = [
             'public'             => true,
@@ -235,28 +230,6 @@ class Loader
         if ( is_admin() ) {
             \Arya\ServiceDesk\Admin\Admin::newInstance( $this );
         }
-    }
-
-    /**
-     * Fires once activated plugin have loaded.
-     *
-     * @since 1.0.0
-     *
-     * @return void
-     */
-    public function plugin()
-    {
-    }
-
-    /**
-     * Fires once activated plugins have loaded.
-     *
-     * @since 1.0.0
-     *
-     * @return void
-     */
-    public function plugins()
-    {
     }
 
     /**

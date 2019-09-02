@@ -59,9 +59,6 @@ class Admin
         if ( current_user_can( 'activate_plugins' ) ) {
             add_action( 'admin_init', [ $this, 'plugins' ] );
         }
-
-        /* Setting for users with other roles and capabilities */
-        //add_action( 'admin_menu', [ $this, 'foo' ] );
     }
 
     /**
@@ -118,7 +115,7 @@ class Admin
 
         $general = add_menu_page(
             esc_html__( 'General Settings', 'arya-service-desk' ),
-            esc_html__( 'Plugin Name', 'arya-service-desk' ),
+            esc_html__( 'Arya Service Desk', 'arya-service-desk' ),
             'manage_options',
             $general_slug,
             [ $general_page, 'render' ],
@@ -135,7 +132,7 @@ class Admin
 
         $about = add_submenu_page(
             $general_slug,
-            esc_html__( 'About Plugin Name', 'arya-service-desk' ),
+            esc_html__( 'About Arya Service Desk', 'arya-service-desk' ),
             esc_html__( 'About', 'arya-service-desk' ),
             'manage_options',
             $about_slug,
