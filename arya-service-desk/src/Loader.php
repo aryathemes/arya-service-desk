@@ -49,6 +49,8 @@ class Loader
 
         add_action( 'init', [ $this, 'registerPostType' ] );
 
+        add_action( 'init', [ $this, 'registerPostStatuses' ] );
+
         add_action( 'init', [ $this, 'registerTaxonomy' ] );
 
         add_action( 'init', [ $this, 'admin' ] );
@@ -82,6 +84,11 @@ class Loader
         load_plugin_textdomain( 'arya-service-desk' );
     }
 
+    /**
+     * Register post types (Articles, FAQs and Tickets)
+     *
+     * @since 1.0.0
+     */
     public function registerPostType()
     {
         /**
@@ -93,6 +100,13 @@ class Loader
         ];
 
         $articles_capabilities = [
+            'edit_posts'          => 'edit_articles',
+            'edit_others_posts'   => 'edit_others_articles',
+            'publish_posts'       => 'publish_articles',
+            'read_private_posts'  => 'read_private_articles',
+            'read_hidden_posts'   => 'read_hidden_articles',
+            'delete_posts'        => 'delete_articles',
+            'delete_others_posts' => 'delete_others_articles'
         ];
 
         $articles_args = [
@@ -108,7 +122,8 @@ class Loader
             'show_in_rest'        => true,
             'menu_position'       => 40,
             'menu_icon'           => 'dashicons-media-default',
-            //'capabilities'        => $articles_capabilities,
+            'capabilities'        => $articles_capabilities,
+            'capability_type'     => [ 'article', 'articles' ],
             'supports'            => [ 'author', 'title', 'editor', 'excerpt', 'thumbnail' ],
             'has_archive'         => true,
             'rewrite'             => [ 'slug' => 'documentation', 'with_front' => false ],
@@ -126,10 +141,17 @@ class Loader
         ];
 
         $faqs_capabilities = [
+            'edit_posts'          => 'edit_faqs',
+            'edit_others_posts'   => 'edit_others_faqs',
+            'publish_posts'       => 'publish_faqs',
+            'read_private_posts'  => 'read_private_faqs',
+            'read_hidden_posts'   => 'read_hidden_faqs',
+            'delete_posts'        => 'delete_faqs',
+            'delete_others_posts' => 'delete_others_faqs'
         ];
 
         $faqs_args = [
-            'label'               => __( 'FAQs', 'knowledge-base' ),
+            'label'               => __( 'FAQs', 'arya-service-desk' ),
             'labels'              => $faqs_labels,
             'public'              => true,
             'hierarchical'        => false,
@@ -141,7 +163,8 @@ class Loader
             'show_in_rest'        => false,
             'menu_position'       => 40,
             'menu_icon'           => 'dashicons-sos',
-            //'capabilities'        => $faqs_capabilities,
+            'capabilities'        => $faqs_capabilities,
+            'capability_type'     => [ 'faq', 'faqs' ],
             'supports'            => [ 'title', 'editor' ],
             'has_archive'         => false,
             'can_export'          => true,
@@ -157,11 +180,18 @@ class Loader
             'singular_name' => __( 'Ticket',  'arya-service-desk' )
         ];
 
-        $ticket_capabilities = [
+        $tickets_capabilities = [
+            'edit_posts'          => 'edit_tickets',
+            'edit_others_posts'   => 'edit_others_tickets',
+            'publish_posts'       => 'publish_ticket',
+            'read_private_posts'  => 'read_private_tickets',
+            'read_hidden_posts'   => 'read_hidden_tickets',
+            'delete_posts'        => 'delete_tickets',
+            'delete_others_posts' => 'delete_others_tickets'
         ];
 
         $ticket_args = [
-            'label'               => __( 'Tickets', 'knowledge-base' ),
+            'label'               => __( 'Tickets', 'arya-service-desk' ),
             'labels'              => $tickets_labels,
             'public'              => true,
             'hierarchical'        => false,
@@ -173,7 +203,8 @@ class Loader
             'show_in_rest'        => false,
             'menu_position'       => 40,
             'menu_icon'           => 'dashicons-email',
-            //'capabilities'        => $tickets_capabilities,
+            'capabilities'        => $tickets_capabilities,
+            'capability_type'     => [ 'ticket', 'tickets' ],
             'supports'            => [ 'title', 'editor' ],
             'has_archive'         => false,
             'can_export'          => true,
@@ -182,11 +213,60 @@ class Loader
         register_post_type( 'service-desk-ticket', $ticket_args );
     }
 
+    /**
+     * Register post statuses (Open, Pending, Resolved or Closed for Tickets).
+     *
+     * @since 1.0.0
+     */
+    public function registerPostStatuses()
+    {
+        register_post_status( 'service-desk-ticket-open', [
+            'label'                     => _x( 'Open', 'post', 'arya-service-desk' ),
+            'label_count'               => _n_noop( 'Open <span class="count">(%s)</span>', 'Open <span class="count">(%s)</span>', 'arya-service-desk' ),
+            'protected'                 => true,
+            'exclude_from_search'       => true,
+            'show_in_admin_status_list' => true,
+            'show_in_admin_all_list'    => false
+        ] );
+
+        register_post_status( 'service-desk-ticket-pending', [
+            'label'                     => _x( 'Pending', 'post', 'arya-service-desk' ),
+            'label_count'               => _n_noop( 'Pending <span class="count">(%s)</span>', 'Pending <span class="count">(%s)</span>', 'arya-service-desk' ),
+            'protected'                 => true,
+            'exclude_from_search'       => true,
+            'show_in_admin_status_list' => true,
+            'show_in_admin_all_list'    => false
+        ] );
+
+        register_post_status( 'service-desk-ticket-resolved', [
+            'label'                     => _x( 'Resolved', 'post', 'arya-service-desk' ),
+            'label_count'               => _n_noop( 'Resolved <span class="count">(%s)</span>', 'Resolved <span class="count">(%s)</span>', 'arya-service-desk' ),
+            'protected'                 => true,
+            'exclude_from_search'       => true,
+            'show_in_admin_status_list' => true,
+            'show_in_admin_all_list'    => false
+        ] );
+
+        register_post_status( 'service-desk-ticket-closed', [
+            'label'                     => _x( 'Closed', 'post', 'arya-service-desk' ),
+            'label_count'               => _n_noop( 'Closed <span class="count">(%s)</span>', 'Closed <span class="count">(%s)</span>', 'arya-service-desk' ),
+            'protected'                 => true,
+            'exclude_from_search'       => true,
+            'show_in_admin_status_list' => true,
+            'show_in_admin_all_list'    => false
+        ] );
+    }
+
+    /**
+     * Register taxonomies.
+     *
+     * @since 1.0.0
+     */
     public function registerTaxonomy()
     {
         $cat_labels = [
             'name'          => __( 'Categories', 'arya-service-desk' ),
-            'singular_name' => __( 'Category', 'arya-service-desk' )
+            'singular_name' => __( 'Category',   'arya-service-desk' )
         ];
 
         $cat_args = [
@@ -197,7 +277,7 @@ class Loader
             'show_in_rest'       => true,
             'show_tagcloud'      => false
         ];
-        register_taxonomy( 'service-desk-article-cat', [ 'knowledge-base' ], $cat_args );
+        register_taxonomy( 'service-desk-article-cat', [ 'service-desk-article' ], $cat_args );
 
         $args = [
             'public'             => true,
@@ -206,7 +286,7 @@ class Loader
             'show_in_rest'       => true,
             'show_tagcloud'      => true
         ];
-        register_taxonomy( 'service-desk-article-tag', [ 'knowledge-base' ], $args );
+        register_taxonomy( 'service-desk-article-tag', [ 'service-desk-article' ], $args );
     }
 
     /**
