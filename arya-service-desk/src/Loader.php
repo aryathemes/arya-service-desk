@@ -99,16 +99,6 @@ class Loader
             'singular_name' => __( 'Article',  'arya-service-desk' )
         ];
 
-        $articles_capabilities = [
-            'edit_posts'          => 'edit_articles',
-            'edit_others_posts'   => 'edit_others_articles',
-            'publish_posts'       => 'publish_articles',
-            'read_private_posts'  => 'read_private_articles',
-            'read_hidden_posts'   => 'read_hidden_articles',
-            'delete_posts'        => 'delete_articles',
-            'delete_others_posts' => 'delete_others_articles'
-        ];
-
         $articles_args = [
             'label'               => __( 'Articles', 'arya-service-desk' ),
             'labels'              => $articles_labels,
@@ -118,12 +108,11 @@ class Loader
             'publicly_queryable'  => true,
             'show_in_menu'        => true,
             'show_in_nav_menus'   => false,
-            'show_in_admin_bar'   => false,
+            'show_in_admin_bar'   => true,
             'show_in_rest'        => true,
             'menu_position'       => 40,
             'menu_icon'           => 'dashicons-media-default',
-            'capabilities'        => $articles_capabilities,
-            'capability_type'     => [ 'article', 'articles' ],
+            'map_meta_cap'        => true,
             'supports'            => [ 'author', 'title', 'editor', 'excerpt', 'thumbnail' ],
             'has_archive'         => true,
             'rewrite'             => [ 'slug' => 'documentation', 'with_front' => false ],
@@ -140,33 +129,23 @@ class Loader
             'singular_name' => __( 'FAQ',  'arya-service-desk' )
         ];
 
-        $faqs_capabilities = [
-            'edit_posts'          => 'edit_faqs',
-            'edit_others_posts'   => 'edit_others_faqs',
-            'publish_posts'       => 'publish_faqs',
-            'read_private_posts'  => 'read_private_faqs',
-            'read_hidden_posts'   => 'read_hidden_faqs',
-            'delete_posts'        => 'delete_faqs',
-            'delete_others_posts' => 'delete_others_faqs'
-        ];
-
         $faqs_args = [
             'label'               => __( 'FAQs', 'arya-service-desk' ),
             'labels'              => $faqs_labels,
             'public'              => true,
             'hierarchical'        => false,
-            'exclude_from_search' => false,
+            'exclude_from_search' => true,
             'publicly_queryable'  => false,
             'show_in_menu'        => true,
             'show_in_nav_menus'   => false,
             'show_in_admin_bar'   => true,
-            'show_in_rest'        => false,
+            'show_in_rest'        => true,
             'menu_position'       => 40,
             'menu_icon'           => 'dashicons-sos',
-            'capabilities'        => $faqs_capabilities,
-            'capability_type'     => [ 'faq', 'faqs' ],
+            'map_meta_cap'        => true,
             'supports'            => [ 'title', 'editor' ],
-            'has_archive'         => false,
+            'has_archive'         => true,
+            'rewrite'             => [ 'slug' => 'faqs', 'with_front' => false ],
             'can_export'          => true,
             'delete_with_user'    => false
         ];
@@ -264,6 +243,9 @@ class Loader
      */
     public function registerTaxonomy()
     {
+        /**
+         * Articles
+         */
         $cat_labels = [
             'name'          => __( 'Categories', 'arya-service-desk' ),
             'singular_name' => __( 'Category',   'arya-service-desk' )
