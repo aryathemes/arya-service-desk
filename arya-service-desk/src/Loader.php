@@ -45,6 +45,8 @@ class Loader
     {
         $this->plugin_file = $plugin_file;
 
+        add_action( 'after_setup_theme', [ $this, 'themes' ] );
+
         add_action( 'init', [ $this, 'loadTextdomain' ] );
 
         add_action( 'init', [ $this, 'registerPostType' ] );
@@ -135,7 +137,7 @@ class Loader
             'public'              => true,
             'hierarchical'        => false,
             'exclude_from_search' => true,
-            'publicly_queryable'  => false,
+            'publicly_queryable'  => true,
             'show_in_menu'        => true,
             'show_in_nav_menus'   => false,
             'show_in_admin_bar'   => true,
@@ -269,6 +271,16 @@ class Loader
             'show_tagcloud'      => true
         ];
         register_taxonomy( 'service-desk-article-tag', [ 'service-desk-article' ], $args );
+    }
+
+    /**
+     * Templating system.
+     *
+     * @since 1.0.0
+     */
+    public function themes()
+    {
+        Theme::newInstance();
     }
 
     /**
