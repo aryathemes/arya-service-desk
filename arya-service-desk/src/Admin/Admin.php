@@ -59,6 +59,12 @@ class Admin
         if ( current_user_can( 'activate_plugins' ) ) {
             add_action( 'admin_init', [ $this, 'plugins' ] );
         }
+
+        /* Articles / FAQs */
+        if ( current_user_can( 'edit_posts' ) ) {
+            add_action( 'admin_menu', [ $this, 'articles' ] );
+            add_action( 'admin_menu', [ $this, 'faqs' ]     );
+        }
     }
 
     /**
@@ -119,7 +125,7 @@ class Admin
             'manage_options',
             $general_slug,
             [ $general_page, 'render' ],
-            'dashicons-smiley',
+            'dashicons-sos',
             '99.074074'
         );
 
@@ -143,6 +149,26 @@ class Admin
 
         /* Changes the string of the submenu */
         $submenu[ $general_slug ][0][0] = esc_html_x( 'General', 'settings screen', 'arya-service-desk' );
+    }
+
+    /**
+     * Articles.
+     *
+     * @since 1.0.0
+     */
+    public function articles()
+    {
+        Article::newInstance();
+    }
+
+    /**
+     * FAQs.
+     *
+     * @since 1.0.0
+     */
+    public function faqs()
+    {
+        FAQ::newInstance();
     }
 
     /**
