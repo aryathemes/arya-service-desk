@@ -30,6 +30,17 @@ class Theme
         add_filter( 'template_include', [ $this, 'templates' ], 10, 1 );
 
         add_filter( 'language_attributes', [ $this, 'itemscope' ], 10, 2 );
+
+        $themes = [
+            'twentynineteen',
+            'twentyseventeen'
+        ];
+
+        if ( in_array( $theme = wp_get_theme()->get( 'TextDomain' ), $themes ) ) {
+            add_action( 'init', [ $this, $theme ] );
+        }
+
+        add_action( 'wp_enqueue_scripts', [ $this, 'enqueue' ] );
     }
 
     /**
@@ -117,5 +128,73 @@ class Theme
         }
 
         return $output;
+    }
+
+    /**
+     * Twenty Nineteen theme
+     *
+     * @since 1.0.0
+     */
+    public function twentynineteen()
+    {
+        add_action( 'service_desk_before_main_content', function()
+        {
+            echo '<section id="primary" class="content-area"><main id="main" class="site-main">';
+        });
+
+        add_action( 'service_desk_after_main_content', function()
+        {
+            echo '</main></section>';
+        });
+
+        add_action( 'wp_enqueue_scripts', function()
+        {
+            wp_enqueue_style( 'service-desk-twentynineteen',
+                plugins_url( "static/css/twentynineteen.css", ARYA_SERVICE_DESK_FILE ),
+                [],
+                null
+            );
+        });
+    }
+
+    /**
+     * Twenty Seventeen theme
+     *
+     * @since 1.0.0
+     */
+    public function twentyseventeen()
+    {
+        add_action( 'service_desk_before_main_content', function()
+        {
+            echo '<div class="wrap">';
+        });
+
+        add_action( 'service_desk_after_main_content', function()
+        {
+            echo '</div>';
+        });
+
+        add_action( 'wp_enqueue_scripts', function()
+        {
+            wp_enqueue_style( 'service-desk-twentyseventeen',
+                plugins_url( "static/css/twentyseventeen.css", ARYA_SERVICE_DESK_FILE ),
+                [],
+                null
+            );
+        });
+    }
+
+    /**
+     * Enqueuing Scripts and Styles
+     *
+     * @since 1.0.0
+     */
+    public function enqueue()
+    {
+        wp_enqueue_script( 'service-desk-faqs',
+            plugins_url( "static/js/service-desk-faqs.js", ARYA_SERVICE_DESK_FILE ),
+            [ 'jquery-ui-accordion' ],
+            null
+        );
     }
 }

@@ -22,25 +22,27 @@ $query = new WP_Query( $args ); ?>
     <?php get_search_form( [ 'echo' => true ] ); ?>
 </div>
 
-<main id="main">
+<?php do_action( 'service_desk_before_main_content' ); ?>
 
 <?php if( $query->have_posts() ) : ?>
 
 <div id="articles">
 
-    <?php while( $query->have_posts() ) : $query->the_post(); ?>
+<?php while( $query->have_posts() ) : $query->the_post(); ?>
 
-        <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+    <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
+        <header class="entry-header">
             <h3 class="entry-title"><?php the_title() ?></h3>
+        </header>
 
-            <div class="entry-content">
-                <?php the_content() ?>
-            </div>
+        <div class="entry-content">
+            <?php the_content() ?>
+        </div>
 
-        </article>
+    </article>
 
-    <?php endwhile; ?>
+<?php endwhile; ?>
 
 </div>
 
@@ -50,6 +52,6 @@ $query = new WP_Query( $args ); ?>
 
 <?php endif; ?>
 
-</main>
+<?php do_action( 'service_desk_after_main_content' ); ?>
 
 <?php get_footer( 'service-desk' ); ?>

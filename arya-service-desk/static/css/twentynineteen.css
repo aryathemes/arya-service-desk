@@ -1,0 +1,53 @@
+/**
+ * Twenty Nineteen theme
+ */
+body.post-type-archive-service-desk-faq {
+}
+
+body.post-type-archive-service-desk-faq .entry-header {
+    margin: calc(3 * 1rem) calc(10% + 60px) calc(1rem / 2);
+}
+
+.questions {
+    background: #ECEFF1;
+    margin: 40px calc(10% + 60px) 40px;
+}
+
+.questions.ui-accordion .ui-accordion-header {
+    background-color: #455A64;
+    clear: both;
+    color: #CFD8DC;
+    cursor: pointer;
+    display: block;
+    font-size: 1rem;
+    margin: 0;
+    padding: 0.5rem;
+    position: relative;
+    text-indent: 10px;
+    width: 100%;
+}
+
+.questions.ui-accordion .ui-accordion-header.ui-state-hover,
+.questions.ui-accordion .ui-accordion-header.ui-accordion-header-active {
+    color: #fff;
+}
+
+.questions.ui-accordion .ui-accordion-content {
+    font-size: 0.88889em;
+    line-height: 1.8;
+    padding: 0.5rem;
+}
+
+.questions.ui-accordion .ui-accordion-content p {
+    margin-bottom: 0 0 1rem;
+    margin: 0 0 1rem;
+    padding: 0.5rem;
+}
+
+.questions.ui-accordion .ui-accordion-content p:last-child {
+    margin: 0;
+}
+
+.questions .entry {
+    margin-top: 0;
+}

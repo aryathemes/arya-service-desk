@@ -19,25 +19,29 @@ $args = [
 ];
 $query = new WP_Query( $args ); ?>
 
-<main id="main">
+<?php do_action( 'service_desk_before_main_content' ); ?>
+
+<header class="entry-header">
+    <h1 class="entry-title"><?php esc_html_e( 'Frequently Asked Questions', 'service-desk' ); ?></h1>
+</header>
 
 <?php if( $query->have_posts() ) : ?>
 
-<div id="questions">
+<div id="questions" class="questions">
 
-    <?php while( $query->have_posts() ) : $query->the_post(); ?>
+<?php while( $query->have_posts() ) : $query->the_post(); ?>
 
-        <article id="post-<?php the_ID(); ?>" <?php post_class(); ?> itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+    <article id="post-<?php the_ID(); ?>" <?php post_class(); ?> itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
 
-            <h3 class="entry-title" itemprop="name"><?php the_title() ?></h3>
+        <h3 itemprop="name"><?php the_title() ?></h3>
 
-            <div class="entry-content" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-                <div itemprop="text"><?php the_content() ?></div>
-            </div>
+        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+            <div itemprop="text"><?php the_content() ?></div>
+        </div>
 
-        </article>
+    </article>
 
-    <?php endwhile; ?>
+<?php endwhile; ?>
 
 </div>
 
@@ -47,6 +51,6 @@ $query = new WP_Query( $args ); ?>
 
 <?php endif; ?>
 
-</main>
+<?php do_action( 'service_desk_after_main_content' ); ?>
 
 <?php get_footer( 'service-desk' ); ?>

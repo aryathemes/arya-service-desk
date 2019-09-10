@@ -1,0 +1,40 @@
+/**
+ * Twenty Seventeen theme
+ */
+.questions {
+    background: #ECEFF1;
+}
+
+.questions.ui-accordion .ui-accordion-header {
+    background-color: #455A64;
+    clear: both;
+    color: #CFD8DC;
+    cursor: pointer;
+    display: block;
+    font-size: 1rem;
+    margin: 0;
+    padding: 0.5rem 1rem;
+    position: relative;
+    width: 100%;
+}
+
+.questions.ui-accordion .ui-accordion-header.ui-state-hover,
+.questions.ui-accordion .ui-accordion-header.ui-accordion-header-active {
+    color: #fff;
+}
+
+.questions.ui-accordion .ui-accordion-content {
+    font-size: 1rem;
+    line-height: 1.5;
+    padding: 0.5rem;
+}
+
+.questions.ui-accordion .ui-accordion-content p {
+    margin-bottom: 0 0 1rem;
+    margin: 0 0 1rem;
+    padding: 0.5rem;
+}
+
+.questions.ui-accordion .ui-accordion-content p:last-child {
+    margin: 0;
+}
