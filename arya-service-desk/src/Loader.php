@@ -97,8 +97,18 @@ class Loader
          * Articles
          */
         $articles_labels = [
-            'name'          => __( 'Articles', 'arya-service-desk' ),
-            'singular_name' => __( 'Article',  'arya-service-desk' )
+            'name'               => __( 'Articles',                   'arya-service-desk' ),
+            'singular_name'      => __( 'Article',                    'arya-service-desk' ),
+            'edit_item'          => __( 'Edit Article',               'arya-service-desk' ),
+            'new_item'           => __( 'New Article',                'arya-service-desk' ),
+            'view_item'          => __( 'View Article',               'arya-service-desk' ),
+            'view_items'         => __( 'View Articles',              'arya-service-desk' ),
+            'search_items'       => __( 'Search Articles',            'arya-service-desk' ),
+            'not_found'          => __( 'No articles found',          'arya-service-desk' ),
+            'not_found_in_trash' => __( 'No articles found in Trash', 'arya-service-desk' ),
+            'all_items'          => __( 'All Articles',               'arya-service-desk' ),
+            'item_published'     => __( 'Article published.',         'arya-service-desk' ),
+            'item_updated'       => __( 'Article updated.',           'arya-service-desk' )
         ];
 
         $articles_args = [
@@ -127,8 +137,18 @@ class Loader
          * Frequently Asked Questions
          */
         $faqs_labels = [
-            'name'          => __( 'FAQs', 'arya-service-desk' ),
-            'singular_name' => __( 'FAQ',  'arya-service-desk' )
+            'name'               => __( 'FAQs',                   'arya-service-desk' ),
+            'singular_name'      => __( 'FAQ',                    'arya-service-desk' ),
+            'edit_item'          => __( 'Edit FAQ',               'arya-service-desk' ),
+            'new_item'           => __( 'New FAQ',                'arya-service-desk' ),
+            'view_item'          => __( 'View FAQ',               'arya-service-desk' ),
+            'view_items'         => __( 'View FAQs',              'arya-service-desk' ),
+            'search_items'       => __( 'Search FAQs',            'arya-service-desk' ),
+            'not_found'          => __( 'No faqs found',          'arya-service-desk' ),
+            'not_found_in_trash' => __( 'No faqs found in Trash', 'arya-service-desk' ),
+            'all_items'          => __( 'All FAQs',               'arya-service-desk' ),
+            'item_published'     => __( 'FAQ published.',         'arya-service-desk' ),
+            'item_updated'       => __( 'FAQ updated.',           'arya-service-desk' )
         ];
 
         $faqs_args = [
@@ -157,8 +177,18 @@ class Loader
          * Tickets
          */
         $tickets_labels = [
-            'name'          => __( 'Tickets', 'arya-service-desk' ),
-            'singular_name' => __( 'Ticket',  'arya-service-desk' )
+            'name'               => __( 'Tickets',                   'arya-service-desk' ),
+            'singular_name'      => __( 'Ticket',                    'arya-service-desk' ),
+            'edit_item'          => __( 'Edit Ticket',               'arya-service-desk' ),
+            'new_item'           => __( 'New Ticket',                'arya-service-desk' ),
+            'view_item'          => __( 'View Ticket',               'arya-service-desk' ),
+            'view_items'         => __( 'View Tickets',              'arya-service-desk' ),
+            'search_items'       => __( 'Search Tickets',            'arya-service-desk' ),
+            'not_found'          => __( 'No tickets found',          'arya-service-desk' ),
+            'not_found_in_trash' => __( 'No tickets found in Trash', 'arya-service-desk' ),
+            'all_items'          => __( 'All Tickets',               'arya-service-desk' ),
+            'item_published'     => __( 'Ticket published.',         'arya-service-desk' ),
+            'item_updated'       => __( 'Ticket updated.',           'arya-service-desk' )
         ];
 
         $tickets_capabilities = [
