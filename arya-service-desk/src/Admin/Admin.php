@@ -106,10 +106,10 @@ class Admin
         /* Menu */
         global $menu, $submenu;
 
-        $menu[35] = [
+        $menu[30] = [
             0 => '',
             1 => 'read',
-            2 => 'separator35',
+            2 => 'separator30',
             3 => '',
             4 => 'wp-menu-separator'
         ];
@@ -121,12 +121,12 @@ class Admin
 
         $general = add_menu_page(
             esc_html__( 'General Settings', 'arya-service-desk' ),
-            esc_html__( 'Arya Service Desk', 'arya-service-desk' ),
+            esc_html__( 'Service Desk', 'arya-service-desk' ),
             'manage_options',
             $general_slug,
             [ $general_page, 'render' ],
             'dashicons-sos',
-            '99.074074'
+            '30'
         );
 
         add_action( "load-$general", [ $general_page, 'help' ] );
