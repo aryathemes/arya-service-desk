@@ -82,6 +82,10 @@ class Theme
     {
         $templates = [];
 
+        if ( is_post_type_archive( 'service-desk-article' ) ) {
+            $templates[] = 'archive-article.php';
+        }
+
         if ( is_post_type_archive( 'service-desk-faq' ) ) {
             $templates[] = 'archive-faq.php';
         }
