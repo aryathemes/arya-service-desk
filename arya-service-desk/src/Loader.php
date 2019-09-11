@@ -279,15 +279,25 @@ class Loader
          * Articles
          */
         $cat_labels = [
-            'name'          => __( 'Categories', 'arya-service-desk' ),
-            'singular_name' => __( 'Category',   'arya-service-desk' )
+            'name'          => _x( 'Categories',          'article category', 'arya-service-desk' ),
+            'singular_name' => _x( 'Category',            'article category', 'arya-service-desk' ),
+            'search_items'  => _x( 'Search Categories',   'article category', 'arya-service-desk' ),
+            'all_items'     => _x( 'All Categories',      'article category', 'arya-service-desk' ),
+            'parent_item'   => _x( 'Parent Category',     'article category', 'arya-service-desk' ),
+            'edit_item'     => _x( 'Edit Category',       'article category', 'arya-service-desk' ),
+            'view_item'     => _x( 'View Category',       'article category', 'arya-service-desk' ),
+            'update_item'   => _x( 'Update Category',     'article category', 'arya-service-desk' ),
+            'add_new_item'  => _x( 'Add New Category',    'article category', 'arya-service-desk' ),
+            'new_item_name' => _x( 'New Category Name',   'article category', 'arya-service-desk' ),
+            'not_found'     => _x( 'No categories found', 'article category', 'arya-service-desk' ),
+            'no_terms'      => _x( 'No categories',       'article category', 'arya-service-desk' )
         ];
 
         $cat_args = [
             'labels'             => $cat_labels,
             'public'             => true,
             'publicly_queryable' => true,
-            'hierarchical'       => false,
+            'hierarchical'       => true,
             'show_in_rest'       => true,
             'show_tagcloud'      => false
         ];
@@ -301,6 +311,34 @@ class Loader
             'show_tagcloud'      => true
         ];
         register_taxonomy( 'service-desk-article-tag', [ 'service-desk-article' ], $args );
+
+        /**
+         * FAQs
+         */
+        $faq_cat_labels = [
+            'name'          => _x( 'Categories',          'faq category', 'arya-service-desk' ),
+            'singular_name' => _x( 'Category',            'faq category', 'arya-service-desk' ),
+            'search_items'  => _x( 'Search Categories',   'faq category', 'arya-service-desk' ),
+            'all_items'     => _x( 'All Categories',      'faq category', 'arya-service-desk' ),
+            'parent_item'   => _x( 'Parent Category',     'faq category', 'arya-service-desk' ),
+            'edit_item'     => _x( 'Edit Category',       'faq category', 'arya-service-desk' ),
+            'view_item'     => _x( 'View Category',       'faq category', 'arya-service-desk' ),
+            'update_item'   => _x( 'Update Category',     'faq category', 'arya-service-desk' ),
+            'add_new_item'  => _x( 'Add New Category',    'faq category', 'arya-service-desk' ),
+            'new_item_name' => _x( 'New Category Name',   'faq category', 'arya-service-desk' ),
+            'not_found'     => _x( 'No categories found', 'faq category', 'arya-service-desk' ),
+            'no_terms'      => _x( 'No categories',       'faq category', 'arya-service-desk' )
+        ];
+
+        $faq_cat_args = [
+            'labels'             => $faq_cat_labels,
+            'public'             => true,
+            'publicly_queryable' => true,
+            'hierarchical'       => true,
+            'show_in_rest'       => true,
+            'show_tagcloud'      => false
+        ];
+        register_taxonomy( 'service-desk-faq-cat', [ 'service-desk-faq' ], $faq_cat_args );
     }
 
     /**
