@@ -1,0 +1,77 @@
+/**
+ * Twenty Seventeen theme
+ */
+
+/* Extra small devices (portrait phones, less than 576px) */
+
+/**
+ * Articles
+ */
+body.post-type-archive-service-desk-article #content {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-areas:
+        "search"
+        "main";
+    padding: 1.25rem; /* 20px*/
+    width: 100%;
+}
+
+body.post-type-archive-service-desk-article .search-container {
+    grid-area: search;
+    padding: 1.25rem 0; /* 20px 0 */
+}
+
+/**
+ * FAQs
+ */
+.questions {
+}
+
+.questions.ui-accordion .ui-accordion-header {
+}
+
+.questions.ui-accordion .ui-accordion-header.ui-state-hover,
+.questions.ui-accordion .ui-accordion-header.ui-accordion-header-active {
+    color: #fff;
+}
+
+.questions.ui-accordion .ui-accordion-content {
+}
+
+.questions.ui-accordion .ui-accordion-content p {
+}
+
+.questions.ui-accordion .ui-accordion-content p:last-child {
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+
+    body.post-type-archive-service-desk-article #content {
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-areas:
+            "search"
+            "main";
+        padding: 1.25rem; /* 20px */
+        width: 100%;
+    }
+
+    body.post-type-archive-service-desk-article .search-container {
+        grid-area: search;
+        padding: 1.25rem; /* 20px */
+    }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+}

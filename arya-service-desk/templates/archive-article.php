@@ -26,14 +26,12 @@ $query = new WP_Query( $args ); ?>
 
 <?php if( $query->have_posts() ) : ?>
 
-<div id="articles">
-
-<?php while( $query->have_posts() ) : $query->the_post(); ?>
+    <?php while( $query->have_posts() ) : $query->the_post(); ?>
 
     <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
         <header class="entry-header">
-            <h3 class="entry-title"><?php the_title() ?></h3>
+            <?php the_title( '<h3 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h3>' ); ?>
         </header>
 
         <div class="entry-content">
@@ -42,9 +40,7 @@ $query = new WP_Query( $args ); ?>
 
     </article>
 
-<?php endwhile; ?>
-
-</div>
+    <?php endwhile; ?>
 
 <?php else : ?>
 

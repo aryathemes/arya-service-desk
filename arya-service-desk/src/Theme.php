@@ -32,6 +32,7 @@ class Theme
         add_filter( 'language_attributes', [ $this, 'itemscope' ], 10, 2 );
 
         $themes = [
+            'arya',
             'twentynineteen',
             'twentyseventeen'
         ];
@@ -131,6 +132,42 @@ class Theme
     }
 
     /**
+     * Arya theme
+     *
+     * @since 1.0.0
+     */
+    public function arya()
+    {
+        add_filter( 'is_active_sidebar', function( $is_active_sidebar, $index )
+        {
+            if ( is_post_type_archive( 'service-desk-faq' ) ) {
+                return ! in_array( $index, [ 'primary', 'secondary' ] );
+            }
+
+            return $is_active_sidebar;
+        }, 10, 2 );
+
+        add_action( 'service_desk_before_main_content', function()
+        {
+            echo '<main id="main" class="main">';
+        });
+
+        add_action( 'service_desk_after_main_content', function()
+        {
+            echo '</main>';
+        });
+
+        add_action( 'wp_enqueue_scripts', function()
+        {
+            wp_enqueue_style( 'service-desk-arya',
+                plugins_url( "static/css/arya.css", ARYA_SERVICE_DESK_FILE ),
+                [],
+                null
+            );
+        });
+    }
+
+    /**
      * Twenty Nineteen theme
      *
      * @since 1.0.0
@@ -185,7 +222,7 @@ class Theme
     }
 
     /**
-     * Enqueuing Scripts and Styles
+     * Enqueuing scripts.
      *
      * @since 1.0.0
      */

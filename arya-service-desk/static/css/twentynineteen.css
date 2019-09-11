@@ -1,6 +1,21 @@
 /**
  * Twenty Nineteen theme
  */
+
+/**
+ * Articles
+ */
+.post-type-archive-service-desk-article .search-container {
+    margin: 40px calc(10% + 60px) 40px;
+}
+
+.post-type-archive-service-desk-article .search-container input[type="search"] {
+    width: calc(100% - 108px);
+}
+
+/**
+ * FAQs
+ */
 body.post-type-archive-service-desk-faq {
 }
 
