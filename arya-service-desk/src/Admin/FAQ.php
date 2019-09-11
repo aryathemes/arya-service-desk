@@ -23,6 +23,9 @@ class FAQ
     /**
      * Constructor.
      *
+     * @link https://developer.wordpress.org/reference/hooks/manage_post_type_posts_columns/
+     * @link https://developer.wordpress.org/reference/hooks/manage_post-post_type_posts_custom_column/
+     *
      * @since 1.0.0
      */
     private function __construct()
@@ -32,7 +35,7 @@ class FAQ
         add_filter( 'write_your_story', [ $this, 'body' ], 10, 2 );
 
         /* List table */
-        add_filter( 'manage_edit-service-desk-faq_columns', [ $this, 'column' ],  5, 1 );
+        add_filter( 'manage_service-desk-faq_posts_columns', [ $this, 'columns' ],  5, 1 );
         add_action( 'manage_service-desk-faq_posts_custom_column', [ $this, 'answer' ], 10, 2 );
     }
 
@@ -85,26 +88,30 @@ class FAQ
      *
      * @since 1.0.0
      */
-    public function column( $columns )
+    public function columns( $columns )
     {
         $date = $columns['date'];
         unset( $columns['date'] );
 
         $columns['answer'] = __( 'Answer', 'arya-service-desk' );
+
         $columns['date'] = $date;
 
         return $columns;
     }
 
     /**
-     * Displays the answer.
+     * Displays the column data.
      *
      * @since 1.0.0
      */
-    public function answer( $column, $post_id )
+    public function answer( $column_name, $post_id )
     {
-        if ( 'answer' == $column ) {
-            echo wp_kses_post( get_post_field( 'post_content', $post_id ) );
+        switch( $column_name ) {
+            case 'answer':
+                echo wp_kses_post( get_post_field( 'post_content', $post_id ) );
+                break;
+            default:
         }
     }
 }
