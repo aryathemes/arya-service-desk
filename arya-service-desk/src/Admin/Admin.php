@@ -125,7 +125,7 @@ class Admin
             'manage_options',
             $general_slug,
             [ $general_page, 'render' ],
-            'dashicons-sos',
+            'dashicons-chart-area',
             '30'
         );
 
@@ -148,7 +148,7 @@ class Admin
         add_action( "load-$about", [ $about_page, 'enqueue' ] );
 
         /* Changes the string of the submenu */
-        $submenu[ $general_slug ][0][0] = esc_html_x( 'General', 'settings screen', 'arya-service-desk' );
+        $submenu[ $general_slug ][0][0] = esc_html_x( 'Settings', 'settings screen', 'arya-service-desk' );
     }
 
     /**
