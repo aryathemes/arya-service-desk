@@ -148,6 +148,58 @@ class Loader
         register_post_type( 'service-desk-ticket', $ticket_args );
 
         /**
+         * Replies
+         */
+        $tickets_reply_labels = [
+            'name'               => __( 'Replies',                   'arya-service-desk' ),
+            'singular_name'      => __( 'Reply',                     'arya-service-desk' ),
+            'add_new_item'       => __( 'Add New Reply',             'arya-service-desk' ),
+            'edit_item'          => __( 'Edit Reply',                'arya-service-desk' ),
+            'new_item'           => __( 'New Reply',                 'arya-service-desk' ),
+            'view_item'          => __( 'View Reply',                'arya-service-desk' ),
+            'view_items'         => __( 'View Replies',              'arya-service-desk' ),
+            'search_items'       => __( 'Search Replies',            'arya-service-desk' ),
+            'not_found'          => __( 'No replies found',          'arya-service-desk' ),
+            'not_found_in_trash' => __( 'No replies found in Trash', 'arya-service-desk' ),
+            'all_items'          => __( 'All Replies',               'arya-service-desk' ),
+            'item_published'     => __( 'Reply published.',          'arya-service-desk' ),
+            'item_updated'       => __( 'Reply updated.',            'arya-service-desk' )
+        ];
+
+        $tickets_reply_capabilities = [
+            'edit_posts'          => 'edit_replies',
+            'edit_others_posts'   => 'edit_others_replies',
+            'publish_posts'       => 'publish_replies',
+            'read_private_posts'  => 'read_private_replies',
+            'read_hidden_posts'   => 'read_hidden_replies',
+            'delete_posts'        => 'delete_replies',
+            'delete_others_posts' => 'delete_others_replies'
+        ];
+
+        $ticket_reply_args = [
+            'label'               => __( 'Replies', 'arya-service-desk' ),
+            'labels'              => $tickets_reply_labels,
+            'public'              => true,
+            'hierarchical'        => false,
+            'exclude_from_search' => true,
+            'publicly_queryable'  => false,
+            'show_ui'             => true,
+            'show_in_menu'        => false,
+            'show_in_nav_menus'   => false,
+            'show_in_admin_bar'   => false,
+            'show_in_rest'        => false,
+            'menu_position'       => 31,
+            'menu_icon'           => 'dashicons-email',
+            'capabilities'        => $tickets_reply_capabilities,
+            'capability_type'     => [ 'reply', 'replies' ],
+            'supports'            => [ 'editor' ],
+            'has_archive'         => false,
+            'can_export'          => true,
+            'delete_with_user'    => false
+        ];
+        register_post_type( 'service-desk-reply', $ticket_reply_args );
+
+        /**
          * Articles
          */
         $articles_labels = [

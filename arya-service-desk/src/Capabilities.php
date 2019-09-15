@@ -57,37 +57,67 @@ class Capabilities
             'service_desk_manager' => [
                 'name' => 'Service Desk Manager',
                 'capabilities' => [
+                    /* Tickets */
                     'publish_tickets'       => true,
                     'edit_tickets'          => true,
                     'edit_others_tickets'   => true,
                     'read_private_tickets'  => true,
                     'read_hidden_tickets'   => true,
                     'delete_tickets'        => true,
-                    'delete_others_tickets' => true
+                    'delete_others_tickets' => true,
+
+                    /* Replies */
+                    'publish_replies'       => true,
+                    'edit_replies'          => true,
+                    'edit_others_replies'   => true,
+                    'read_private_replies'  => true,
+                    'read_hidden_replies'   => true,
+                    'delete_replies'        => true,
+                    'delete_others_replies' => true
                 ]
             ],
             'service_desk_agent' => [
                 'name' => 'Service Desk Agent',
                 'capabilities' => [
+                    /* Tickets */
                     'publish_tickets'       => true,
                     'edit_tickets'          => true,
                     'edit_others_tickets'   => false,
                     'read_private_tickets'  => true,
                     'read_hidden_tickets'   => true,
                     'delete_tickets'        => false,
-                    'delete_others_tickets' => false
+                    'delete_others_tickets' => false,
+
+                    /* Replies */
+                    'publish_replies'       => true,
+                    'edit_replies'          => true,
+                    'edit_others_replies'   => false,
+                    'read_private_replies'  => true,
+                    'read_hidden_replies'   => true,
+                    'delete_replies'        => true,
+                    'delete_others_replies' => false
                 ]
             ],
             'service_desk_customer' => [
                 'name' => 'Service Desk Customer',
                 'capabilities' => [
+                    /* Tickets */
                     'publish_tickets'       => true,
                     'edit_tickets'          => true,
                     'edit_others_tickets'   => false,
                     'read_private_tickets'  => false,
                     'read_hidden_tickets'   => false,
-                    'delete_tickets'        => false, 
-                    'delete_others_tickets' => false
+                    'delete_tickets'        => false,
+                    'delete_others_tickets' => false,
+
+                    /* Replies */
+                    'publish_replies'       => true,
+                    'edit_replies'          => true,
+                    'edit_others_replies'   => false,
+                    'read_private_replies'  => false,
+                    'read_hidden_replies'   => false,
+                    'delete_replies'        => true,
+                    'delete_others_replies' => false
                 ]
             ]
         ];
