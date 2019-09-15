@@ -60,10 +60,14 @@ class Admin
             add_action( 'admin_init', [ $this, 'plugins' ] );
         }
 
-        /* Articles / FAQs */
+        /* Articles / FAQs / Tickets */
         if ( current_user_can( 'edit_posts' ) ) {
             add_action( 'admin_menu', [ $this, 'articles' ] );
             add_action( 'admin_menu', [ $this, 'faqs' ]     );
+        }
+
+        if ( current_user_can( 'edit_tickets' ) ) {
+            add_action( 'admin_menu', [ $this, 'tickets' ] );
         }
     }
 
@@ -169,6 +173,16 @@ class Admin
     public function faqs()
     {
         FAQ::newInstance();
+    }
+
+    /**
+     * Tickets.
+     *
+     * @since 1.0.0
+     */
+    public function tickets()
+    {
+        Ticket::newInstance();
     }
 
     /**

@@ -45,6 +45,8 @@ class Loader
     {
         $this->plugin_file = $plugin_file;
 
+        Capabilities::newInstance();
+
         add_action( 'after_setup_theme', [ $this, 'themes' ] );
 
         add_action( 'init', [ $this, 'loadTextdomain' ] );
@@ -93,6 +95,58 @@ class Loader
      */
     public function registerPostType()
     {
+        /**
+         * Tickets
+         */
+        $tickets_labels = [
+            'name'               => __( 'Tickets',                   'arya-service-desk' ),
+            'singular_name'      => __( 'Ticket',                    'arya-service-desk' ),
+            'add_new_item'       => __( 'Add New Ticket',            'arya-service-desk' ),
+            'edit_item'          => __( 'Edit Ticket',               'arya-service-desk' ),
+            'new_item'           => __( 'New Ticket',                'arya-service-desk' ),
+            'view_item'          => __( 'View Ticket',               'arya-service-desk' ),
+            'view_items'         => __( 'View Tickets',              'arya-service-desk' ),
+            'search_items'       => __( 'Search Tickets',            'arya-service-desk' ),
+            'not_found'          => __( 'No tickets found',          'arya-service-desk' ),
+            'not_found_in_trash' => __( 'No tickets found in Trash', 'arya-service-desk' ),
+            'all_items'          => __( 'All Tickets',               'arya-service-desk' ),
+            'item_published'     => __( 'Ticket published.',         'arya-service-desk' ),
+            'item_updated'       => __( 'Ticket updated.',           'arya-service-desk' )
+        ];
+
+        $tickets_capabilities = [
+            'edit_posts'          => 'edit_tickets',
+            'edit_others_posts'   => 'edit_others_tickets',
+            'publish_posts'       => 'publish_tickets',
+            'read_private_posts'  => 'read_private_tickets',
+            'read_hidden_posts'   => 'read_hidden_tickets',
+            'delete_posts'        => 'delete_tickets',
+            'delete_others_posts' => 'delete_others_tickets'
+        ];
+
+        $ticket_args = [
+            'label'               => __( 'Tickets', 'arya-service-desk' ),
+            'labels'              => $tickets_labels,
+            'public'              => true,
+            'hierarchical'        => false,
+            'exclude_from_search' => true,
+            'publicly_queryable'  => false,
+            'show_ui'             => true,
+            'show_in_menu'        => true,
+            'show_in_nav_menus'   => false,
+            'show_in_admin_bar'   => true,
+            'show_in_rest'        => false,
+            'menu_position'       => 31,
+            'menu_icon'           => 'dashicons-email',
+            'capabilities'        => $tickets_capabilities,
+            'capability_type'     => [ 'ticket', 'tickets' ],
+            'supports'            => [ 'title', 'editor' ],
+            'has_archive'         => false,
+            'can_export'          => true,
+            'delete_with_user'    => false
+        ];
+        register_post_type( 'service-desk-ticket', $ticket_args );
+
         /**
          * Articles
          */
@@ -172,56 +226,6 @@ class Loader
             'delete_with_user'    => false
         ];
         register_post_type( 'service-desk-faq', $faqs_args );
-
-        /**
-         * Tickets
-         */
-        $tickets_labels = [
-            'name'               => __( 'Tickets',                   'arya-service-desk' ),
-            'singular_name'      => __( 'Ticket',                    'arya-service-desk' ),
-            'edit_item'          => __( 'Edit Ticket',               'arya-service-desk' ),
-            'new_item'           => __( 'New Ticket',                'arya-service-desk' ),
-            'view_item'          => __( 'View Ticket',               'arya-service-desk' ),
-            'view_items'         => __( 'View Tickets',              'arya-service-desk' ),
-            'search_items'       => __( 'Search Tickets',            'arya-service-desk' ),
-            'not_found'          => __( 'No tickets found',          'arya-service-desk' ),
-            'not_found_in_trash' => __( 'No tickets found in Trash', 'arya-service-desk' ),
-            'all_items'          => __( 'All Tickets',               'arya-service-desk' ),
-            'item_published'     => __( 'Ticket published.',         'arya-service-desk' ),
-            'item_updated'       => __( 'Ticket updated.',           'arya-service-desk' )
-        ];
-
-        $tickets_capabilities = [
-            'edit_posts'          => 'edit_tickets',
-            'edit_others_posts'   => 'edit_others_tickets',
-            'publish_posts'       => 'publish_ticket',
-            'read_private_posts'  => 'read_private_tickets',
-            'read_hidden_posts'   => 'read_hidden_tickets',
-            'delete_posts'        => 'delete_tickets',
-            'delete_others_posts' => 'delete_others_tickets'
-        ];
-
-        $ticket_args = [
-            'label'               => __( 'Tickets', 'arya-service-desk' ),
-            'labels'              => $tickets_labels,
-            'public'              => true,
-            'hierarchical'        => false,
-            'exclude_from_search' => true,
-            'publicly_queryable'  => false,
-            'show_in_menu'        => true,
-            'show_in_nav_menus'   => false,
-            'show_in_admin_bar'   => true,
-            'show_in_rest'        => false,
-            'menu_position'       => 31,
-            'menu_icon'           => 'dashicons-email',
-            'capabilities'        => $tickets_capabilities,
-            'capability_type'     => [ 'ticket', 'tickets' ],
-            'supports'            => [ 'title', 'editor' ],
-            'has_archive'         => false,
-            'can_export'          => true,
-            'delete_with_user'    => false
-        ];
-        register_post_type( 'service-desk-ticket', $ticket_args );
     }
 
     /**
