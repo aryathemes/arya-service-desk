@@ -269,7 +269,7 @@ class Loader
             'menu_position'       => 31,
             'menu_icon'           => 'dashicons-sos',
             'map_meta_cap'        => true,
-            'supports'            => [ 'title', 'editor' ],
+            'supports'            => [ 'title', 'editor', 'page-attributes' ],
             'has_archive'         => true,
             'rewrite'             => [ 'slug' => 'faqs', 'with_front' => false ],
             'can_export'          => true,
