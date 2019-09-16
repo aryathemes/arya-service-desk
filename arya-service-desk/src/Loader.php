@@ -188,8 +188,6 @@ class Loader
             'show_in_nav_menus'   => false,
             'show_in_admin_bar'   => false,
             'show_in_rest'        => false,
-            'menu_position'       => 31,
-            'menu_icon'           => 'dashicons-email',
             'capabilities'        => $tickets_reply_capabilities,
             'capability_type'     => [ 'reply', 'replies' ],
             'supports'            => [ 'editor' ],
@@ -331,6 +329,37 @@ class Loader
      */
     public function registerTaxonomy()
     {
+        /**
+         * Tickets
+         */
+        $topic_labels = [
+            'name'          => _x( 'Topics',          'ticket category', 'arya-service-desk' ),
+            'singular_name' => _x( 'Topic',           'ticket category', 'arya-service-desk' ),
+            'search_items'  => _x( 'Search Topics',   'ticket category', 'arya-service-desk' ),
+            'all_items'     => _x( 'All Topics',      'ticket category', 'arya-service-desk' ),
+            'parent_item'   => _x( 'Parent Topic',    'ticket category', 'arya-service-desk' ),
+            'edit_item'     => _x( 'Edit Topic',      'ticket category', 'arya-service-desk' ),
+            'view_item'     => _x( 'View Topic',      'ticket category', 'arya-service-desk' ),
+            'update_item'   => _x( 'Update Topic',    'ticket category', 'arya-service-desk' ),
+            'add_new_item'  => _x( 'Add New Topic',   'ticket category', 'arya-service-desk' ),
+            'new_item_name' => _x( 'New Topic Name',  'ticket category', 'arya-service-desk' ),
+            'not_found'     => _x( 'No topics found', 'ticket category', 'arya-service-desk' ),
+            'no_terms'      => _x( 'No topics',       'ticket category', 'arya-service-desk' )
+        ];
+
+        $topic_args = [
+            'labels'             => $topic_labels,
+            'public'             => false,
+            'publicly_queryable' => false,
+            'hierarchical'       => false,
+            'show_ui'            => true,
+            'show_in_menu'       => true,
+            'show_in_nav_menus'  => false,
+            'show_in_rest'       => false,
+            'show_tagcloud'      => false
+        ];
+        register_taxonomy( 'service-desk-topic', [ 'service-desk-ticket' ], $topic_args );
+
         /**
          * Articles
          */
