@@ -351,12 +351,14 @@ class Loader
             'labels'             => $topic_labels,
             'public'             => false,
             'publicly_queryable' => false,
-            'hierarchical'       => false,
+            'hierarchical'       => true,
             'show_ui'            => true,
             'show_in_menu'       => true,
             'show_in_nav_menus'  => false,
             'show_in_rest'       => false,
-            'show_tagcloud'      => false
+            'show_tagcloud'      => false,
+            'show_in_quick_edit' => true,
+            'show_admin_column'  => true
         ];
         register_taxonomy( 'service-desk-topic', [ 'service-desk-ticket' ], $topic_args );
 
