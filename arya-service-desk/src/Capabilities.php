@@ -28,6 +28,8 @@ class Capabilities
     private function __construct()
     {
         add_action( 'wp_roles_init', [ $this, 'roles' ] );
+
+        add_action( 'set_current_user', [ $this, 'capabilities' ] );
     }
 
     /**
@@ -129,5 +131,80 @@ class Capabilities
         }
 
         return $wp_roles;
+    }
+
+    /**
+     * Sets a new role to the current user.
+     *
+     * @since 1.0.0
+     */
+    public function capabilities()
+    {
+        $user_id = get_current_user_id();
+
+        if ( $this->getServiceDeskRole( $user_id ) ) {
+            return;
+        }
+
+        $blog_role = $this->getWordPressRole( $user_id );
+
+        /* Role mapping */
+        $new_role = 'administrator' == $blog_role ?
+            'service_desk_manager' :
+            'service_desk_customer';
+
+        $user = wp_get_current_user();
+
+        $user->add_role( $new_role );
+    }
+
+    /**
+     * @since 1.0.0
+     */
+    private function getServiceDeskRole( $user_id )
+    {
+        $role = '';
+
+        $user = get_userdata( $user_id );
+
+        $roles = array_intersect( $user->roles, [
+            'service_desk_manager',
+            'service_desk_agent',
+            'service_desk_customer'
+        ]);
+
+        $roles = array_values( array_filter( $roles ) );
+
+        if ( ! empty( $roles ) ) {
+            $role = $roles[0];
+        }
+
+        return $role;
+    }
+
+    /**
+     * @since 1.0.0
+     */
+    private function getWordPressRole( $user_id )
+    {
+        $role = '';
+
+        $user = get_userdata( $user_id );
+
+        $roles = array_intersect( $user->roles, [
+            'administrator',
+            'editor',
+            'author',
+            'contributor',
+            'subscriber'
+        ]);
+
+        $roles = array_values( array_filter( $roles ) );
+
+        if ( ! empty( $roles ) ) {
+            $role = $roles[0];
+        }
+
+        return $role;
     }
 }
