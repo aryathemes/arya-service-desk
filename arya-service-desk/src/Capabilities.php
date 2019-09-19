@@ -27,6 +27,8 @@ class Capabilities
      */
     private function __construct()
     {
+        add_filter( 'map_meta_cap', [ $this, 'mapping' ], 10, 4);
+
         add_action( 'wp_roles_init', [ $this, 'roles' ] );
 
         add_action( 'set_current_user', [ $this, 'capabilities' ] );
@@ -46,6 +48,49 @@ class Capabilities
         }
 
         return self::$instance;
+    }
+
+    /**
+     * Maps meta capabilities to primitive capabilities.
+     *
+     * @since 1.0.0
+     */
+    public function mapping( $caps, $cap, $user_id, $args )
+    {
+        switch ( $cap ) {
+            case 'edit_ticket':
+                $_post = get_post( $args[0] );
+
+                if ( ! empty( $_post ) ) {
+                    $post_type = get_post_type_object( $_post->post_type );
+
+                    $caps = [];
+
+                    if ( $user_id == $_post->post_author ) {
+                        $caps[] = $post_type->cap->edit_posts;
+                    } else {
+                        $caps[] = $post_type->cap->edit_others_posts;
+                    }
+                }
+                break;
+            case 'delete_ticket':
+                $_post = get_post( $args[0] );
+
+                if ( ! empty( $_post ) ) {
+                    $post_type = get_post_type_object( $_post->post_type );
+
+                    $caps = [];
+
+                    if ( $user_id == $_post->post_author ) {
+                        $caps[] = $post_type->cap->delete_posts;
+                    } else {
+                        $caps[] = $post_type->cap->delete_others_posts;
+                    }
+                }
+                break;
+        }
+
+        return $caps;
     }
 
     /**
@@ -152,6 +197,8 @@ class Capabilities
         $new_role = 'administrator' == $blog_role ?
             'service_desk_manager' :
             'service_desk_customer';
+
+        error_log( $new_role );
 
         $user = wp_get_current_user();
 
