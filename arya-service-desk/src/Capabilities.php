@@ -187,6 +187,10 @@ class Capabilities
     {
         $user_id = get_current_user_id();
 
+        if ( empty( $user_id ) ) {
+            return;
+        }
+
         if ( $this->getServiceDeskRole( $user_id ) ) {
             return;
         }
