@@ -386,7 +386,9 @@ class Loader
             'publicly_queryable' => true,
             'hierarchical'       => true,
             'show_in_rest'       => true,
-            'show_tagcloud'      => false
+            'show_tagcloud'      => false,
+            'show_in_quick_edit' => true,
+            'show_admin_column'  => true
         ];
         register_taxonomy( 'service-desk-article-cat', [ 'service-desk-article' ], $cat_args );
 
@@ -423,7 +425,9 @@ class Loader
             'publicly_queryable' => true,
             'hierarchical'       => true,
             'show_in_rest'       => true,
-            'show_tagcloud'      => false
+            'show_tagcloud'      => false,
+            'show_in_quick_edit' => true,
+            'show_admin_column'  => true
         ];
         register_taxonomy( 'service-desk-faq-cat', [ 'service-desk-faq' ], $faq_cat_args );
     }

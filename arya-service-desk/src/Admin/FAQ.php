@@ -32,11 +32,11 @@ class FAQ
     {
         /* Placeholders */
         add_filter( 'enter_title_here', [ $this, 'title' ], 10, 2 );
-        add_filter( 'write_your_story', [ $this, 'body' ], 10, 2 );
+        add_filter( 'write_your_story', [ $this, 'body' ],  10, 2 );
 
         /* List table */
-        add_filter( 'manage_service-desk-faq_posts_columns', [ $this, 'columns' ],  5, 1 );
-        add_action( 'manage_service-desk-faq_posts_custom_column', [ $this, 'answer' ], 10, 2 );
+        add_filter( 'manage_service-desk-faq_posts_columns',       [ $this, 'columns' ], 15, 1 );
+        add_action( 'manage_service-desk-faq_posts_custom_column', [ $this, 'answer' ],  10, 2 );
     }
 
     /**
@@ -90,14 +90,14 @@ class FAQ
      */
     public function columns( $columns )
     {
-        $date = $columns['date'];
-        unset( $columns['date'] );
+        $top    = array_slice( $columns, 0,    2, true );
+        $bottom = array_slice( $columns, 2, null, true );
 
-        $columns['answer'] = __( 'Answer', 'arya-service-desk' );
+        $answer = [
+            'answer' => __( 'Answer', 'arya-service-desk' )
+        ];
 
-        $columns['date'] = $date;
-
-        return $columns;
+        return $top + $answer + $bottom;;
     }
 
     /**
