@@ -11,7 +11,7 @@
 defined( 'ABSPATH' ) || exit; ?>
 
 <div class="search-container">
-    <form role="search" method="get" class="search-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+    <form role="search" method="get" class="search-form" action="<?php echo esc_url( home_url( '/documentation/' ) ); ?>">
 	    <label for="search-form-documentation">
 	    	<span class="screen-reader-text">Search for:</span>
 	    </label>
