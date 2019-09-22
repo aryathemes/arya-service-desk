@@ -41,6 +41,8 @@ class Theme
             add_action( 'init', [ $this, $theme ] );
         }
 
+        add_action( 'service_desk_before_main_content', [ $this, 'search' ] );
+
         add_action( 'wp_enqueue_scripts', [ $this, 'enqueue' ] );
     }
 
@@ -219,6 +221,28 @@ class Theme
                 null
             );
         });
+    }
+
+    /**
+     * Displays the search form.
+     *
+     * @since 1.0.0
+     */
+    public function search()
+    {
+        $path = $this->getTemplatePath();
+
+        $templates = [
+            "$path/form-search.php"
+        ];
+
+        $template = locate_template( $templates, false );
+
+        if ( empty( $template ) ) {
+            $template = plugin_dir_path( ARYA_SERVICE_DESK_FILE ) . 'templates/form-search.php';
+        }
+
+        load_template( $template, true );
     }
 
     /**

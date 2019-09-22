@@ -18,10 +18,6 @@ $args = [
 ];
 $query = new WP_Query( $args ); ?>
 
-<div class="search-container">
-    <?php get_search_form( [ 'echo' => true ] ); ?>
-</div>
-
 <?php do_action( 'service_desk_before_main_content' ); ?>
 
 <?php if( $query->have_posts() ) : ?>
