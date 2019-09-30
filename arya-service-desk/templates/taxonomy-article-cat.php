@@ -16,7 +16,8 @@ do_action( 'service_desk_before_main_content' );
 
 $args = [
     'post_type'   => 'service-desk-article',
-    'post_status' => 'publish'
+    'post_status' => 'publish',
+    'taxonomy'    => 'service-desk-article-cat'
 ];
 $query = new WP_Query( $args ); ?>
 

@@ -39,9 +39,11 @@ class Theme
 
         if ( in_array( $theme = wp_get_theme()->get( 'TextDomain' ), $themes ) ) {
             add_action( 'init', [ $this, $theme ] );
+        } else {
+            add_action( 'init', [ $this, 'theme' ] );
         }
 
-        add_action( 'service_desk_before_main_content', [ $this, 'search' ] );
+        add_action( 'service_desk_before_main_content', [ $this, 'search' ], 15 );
 
         add_action( 'wp_enqueue_scripts', [ $this, 'enqueue' ] );
     }
@@ -98,6 +100,10 @@ class Theme
 
         if ( is_post_type_archive( 'service-desk-article' ) ) {
             $templates[] = 'archive-article.php';
+        }
+
+        if ( is_tax( 'service-desk-article-cat' ) ) {
+            $templates[] = 'taxonomy-article-cat.php';
         }
 
         if ( is_post_type_archive( 'service-desk-faq' ) ) {
@@ -217,6 +223,33 @@ class Theme
         {
             wp_enqueue_style( 'service-desk-twentyseventeen',
                 plugins_url( "static/css/twentyseventeen.css", ARYA_SERVICE_DESK_FILE ),
+                [],
+                null
+            );
+        });
+    }
+
+    /**
+     * General theme.
+     *
+     * @since 1.0.0
+     */
+    public function theme()
+    {
+        add_action( 'service_desk_before_main_content', function()
+        {
+            echo '<div id="arya-service-desk">';
+        });
+
+        add_action( 'service_desk_after_main_content', function()
+        {
+            echo '</div>';
+        });
+
+        add_action( 'wp_enqueue_scripts', function()
+        {
+            wp_enqueue_style( 'service-desk-theme',
+                plugins_url( "static/css/style.css", ARYA_SERVICE_DESK_FILE ),
                 [],
                 null
             );
