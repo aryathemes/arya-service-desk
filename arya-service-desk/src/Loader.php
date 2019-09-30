@@ -231,7 +231,7 @@ class Loader
             'map_meta_cap'        => true,
             'supports'            => [ 'author', 'title', 'editor', 'excerpt', 'thumbnail' ],
             'has_archive'         => true,
-            'rewrite'             => [ 'slug' => 'documentation', 'with_front' => false ],
+            'rewrite'             => [ 'slug' => 'documentation/%service-desk-article-cat%', 'with_front' => false ],
             'can_export'          => true,
             'delete_with_user'    => false
         ];
@@ -385,6 +385,7 @@ class Loader
             'public'             => true,
             'publicly_queryable' => true,
             'hierarchical'       => true,
+            'rewrite'            => [ 'slug' => 'documentation', 'with_front' => false ],
             'show_in_rest'       => true,
             'show_tagcloud'      => false,
             'show_in_quick_edit' => true,

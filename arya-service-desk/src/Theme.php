@@ -29,6 +29,8 @@ class Theme
     {
         add_filter( 'template_include', [ $this, 'templates' ], 10, 1 );
 
+        add_filter( 'post_type_link', [ $this, 'postTypeLink' ], 10, 2 );
+
         add_filter( 'language_attributes', [ $this, 'itemscope' ], 10, 2 );
 
         $themes = [
@@ -87,6 +89,27 @@ class Theme
         }
 
         return $template;
+    }
+
+    /**
+     * Filters the permalink of an article.
+     *
+     * @since 1.0.0
+     */
+    public function postTypeLink( $post_link, $post )
+    {
+        if ( false !== strpos( $post_link, '%service-desk-article-cat%' ) ) {
+
+            $taxonomy_terms = get_the_terms( $post->ID, 'service-desk-article-cat' );
+
+            foreach ( $taxonomy_terms as $term ) {
+                if ( ! $term->parent ) {
+                    $post_link = str_replace( '%service-desk-article-cat%', $term->slug, $post_link );
+                }
+            }
+        }
+
+        return $post_link;
     }
 
     /**
