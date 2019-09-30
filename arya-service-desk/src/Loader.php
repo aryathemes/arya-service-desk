@@ -127,7 +127,7 @@ class Loader
         $ticket_args = [
             'label'               => __( 'Tickets', 'arya-service-desk' ),
             'labels'              => $tickets_labels,
-            'public'              => true,
+            'public'              => false,
             'hierarchical'        => false,
             'exclude_from_search' => true,
             'publicly_queryable'  => false,
