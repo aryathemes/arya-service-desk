@@ -57,6 +57,10 @@ class Loader
 
         add_action( 'init', [ $this, 'registerTaxonomy' ] );
 
+        add_action( 'init', [ $this, 'shortcodes' ] );
+
+        add_action( 'init', [ $this, 'request' ] );
+
         add_action( 'init', [ $this, 'admin' ] );
     }
 
@@ -431,6 +435,26 @@ class Loader
             'show_admin_column'  => true
         ];
         register_taxonomy( 'service-desk-faq-cat', [ 'service-desk-faq' ], $faq_cat_args );
+    }
+
+    /**
+     * Shortcodes.
+     *
+     * @since 1.0.0
+     */
+    public function shortcodes()
+    {
+        Shortcodes::newInstance();
+    }
+
+    /**
+     * Tickets.
+     *
+     * @since 1.0.0
+     */
+    public function request()
+    {
+        Request::newInstance();
     }
 
     /**
