@@ -84,11 +84,38 @@ class Theme
             $template = locate_template( $templates );
 
             if ( empty( $template ) ) {
-                $template = plugin_dir_path( ARYA_SERVICE_DESK_FILE ) . "templates/{$templates[0]}";
+                $template = plugin_dir_path( ARYA_SERVICE_DESK_FILE ) . "templates/default/{$templates[0]}";
             }
         }
 
         return $template;
+    }
+
+    /**
+     * Retrieves default templates.
+     *
+     * @since 1.0.0
+     */
+    private function getDefaultTemplates()
+    {
+        $templates = [];
+
+        if ( is_post_type_archive( 'service-desk-article' ) ) {
+            $templates[] = 'archive-article.php';
+            $templates[] = 'service-desk/archive-article.php';
+        }
+
+        if ( is_tax( 'service-desk-article-cat' ) ) {
+            $templates[] = 'taxonomy-article-cat.php';
+            $templates[] = 'service-desk/taxonomy-article-cat.php';
+        }
+
+        if ( is_post_type_archive( 'service-desk-faq' ) ) {
+            $templates[] = 'archive-faq.php';
+            $templates[] = 'service-desk/archive-faq.php';
+        }
+
+        return $templates;
     }
 
     /**
@@ -110,40 +137,6 @@ class Theme
         }
 
         return $post_link;
-    }
-
-    /**
-     * Retrieves default templates.
-     *
-     * @since 1.0.0
-     */
-    private function getDefaultTemplates()
-    {
-        $templates = [];
-
-        if ( is_post_type_archive( 'service-desk-article' ) ) {
-            $templates[] = 'archive-article.php';
-        }
-
-        if ( is_tax( 'service-desk-article-cat' ) ) {
-            $templates[] = 'taxonomy-article-cat.php';
-        }
-
-        if ( is_post_type_archive( 'service-desk-faq' ) ) {
-            $templates[] = 'archive-faq.php';
-        }
-
-        return $templates;
-    }
-
-    /**
-     * Retrieves the template path.
-     *
-     * @since 1.0.0
-     */
-    private function getTemplatePath()
-    {
-        return 'service-desk';
     }
 
     /**
@@ -286,16 +279,14 @@ class Theme
      */
     public function search()
     {
-        $path = $this->getTemplatePath();
-
         $templates = [
-            "$path/form-search.php"
+            'service-desk/form-search.php'
         ];
 
         $template = locate_template( $templates, false );
 
         if ( empty( $template ) ) {
-            $template = plugin_dir_path( ARYA_SERVICE_DESK_FILE ) . 'templates/form-search.php';
+            $template = plugin_dir_path( ARYA_SERVICE_DESK_FILE ) . 'templates/default/form-search.php';
         }
 
         load_template( $template, true );
@@ -310,8 +301,9 @@ class Theme
     {
         wp_enqueue_script( 'service-desk-faqs',
             plugins_url( "static/js/service-desk-faqs.js", ARYA_SERVICE_DESK_FILE ),
-            [ 'jquery-ui-accordion' ],
-            null
+            [ 'jquery', 'jquery-ui-accordion' ],
+            null,
+            true
         );
     }
 }
